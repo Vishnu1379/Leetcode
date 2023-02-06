@@ -1,26 +1,18 @@
-class Solution {
-    public int numIslands(char[][] grid) {
-        int c=0;
-        for(int i=0;i<grid.length;i++){
-            for(int j=0;j<grid[0].length;j++){
-                if(grid[i][j]=='1'){
-                    dfs(grid,i,j);
-                    c++;
-                }
-            }
-        }
-        return c;
+class Solution:
+    def bfs(self,grid,row,col):
+        if(row<0 or row>=len(grid) or col<0 or col>=len(grid[0]) or not grid[row][col]=='1'):
+            return 
+        grid[row][col]='0'
+        self.bfs(grid,row+1,col)
+        self.bfs(grid,row-1,col)
+        self.bfs(grid,row,col+1)
+        self.bfs(grid,row,col-1)
+    def numIslands(self, grid: List[List[str]]) -> int:
+        c=0
+        for i in range(len(grid)):
+            for j in range(len(grid[0])):
+                if(grid[i][j]=="1"):
+                    self.bfs(grid,i,j)
+                    c=c+1
+        return c
         
-    }
-    public void dfs(char[][] grid,int row,int col){
-        if(row<0 || row>=grid.length || col<0 || col>=grid[0].length || grid[row][col]!='1'){
-            return;
-        }
-        grid[row][col]='0';
-        dfs(grid,row+1,col);
-        dfs(grid,row-1,col);
-        dfs(grid,row,col+1);
-        dfs(grid,row,col-1);
-        
-    }
-}
